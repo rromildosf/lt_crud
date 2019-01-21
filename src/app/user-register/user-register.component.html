@@ -1,0 +1,44 @@
+<form class="form" (ngSubmit)="onSubmit()" #form="ngForm">
+    
+    <div class="info">* indica campos obrigatórios</div>
+    <!-- Personal information -->
+    <mat-card>
+        <mat-card-title>Dados básicos</mat-card-title>
+        <mat-card-content>
+            <app-personal-info [info]="user"
+                (onChanges)="onChildFormChange($event, 'personalInfo')">
+            </app-personal-info>
+        </mat-card-content>
+    </mat-card>
+
+    <!-- Address -->
+    <mat-card>
+        <mat-card-title>Endereço</mat-card-title>
+        <mat-card-content>
+            <app-address [address]="user?.address"
+                (onChanges)="onChildFormChange($event, 'addressInfo')">
+            </app-address>
+        </mat-card-content>        
+    </mat-card>
+
+
+    <!-- Vehicle -->
+    <mat-card>
+        <mat-card-title>Dados do veículo</mat-card-title>
+        <mat-card-content>
+            <app-vehicle [vehicle]="user?.vehicle"
+                (onChanges)="onChildFormChange($event, 'vehicleInfo')">
+            </app-vehicle>
+        </mat-card-content>
+    </mat-card>
+
+
+
+    <div class="btn-submit">
+        <button type="submit" mat-flat-button color="primary" [disabled]="!formValid">
+            {{ userId ? "Atualizar" : "Registrar" }}
+        </button>
+        
+    </div>
+
+</form>

@@ -1,0 +1,42 @@
+:host {
+    width: 100%;
+    padding: 16px;
+    display: block;
+    max-width: 900px;
+    margin: auto;
+    button:focus {
+        outline: none;
+        border: 0;
+    }
+}
+table {
+    width: 100%;
+
+    .dense {
+        p {
+            margin: 0;
+            font-size: 0.8em;
+            opacity: 0.8;
+        }
+    }
+    .hide-header {
+        display: hide
+    }
+}
+.form-filter {
+    width: 100%;
+}
+
+@media (max-width: 576px) {
+    td {
+        font-size: 1em;
+    }
+    .info-name {
+        padding: 10px 0;
+    }
+    .row-dense {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

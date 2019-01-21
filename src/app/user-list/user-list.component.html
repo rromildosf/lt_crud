@@ -1,0 +1,96 @@
+<div class="alert alert-info" *ngIf="users && !users.length; else table">
+    Nenhum registro para exibir!
+</div>
+
+<ng-template #table>
+
+    <mat-form-field class="form-filter">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+                
+        <!-- First column, name/(name and others infos) -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                {{infoColumnName}} 
+            </th>
+            <td mat-cell *matCellDef="let row" class="info-name">
+                <div class="row-dense">
+                    <div>
+                        {{row.name}} 
+                        <div class="dense" *ngIf="_showDense">
+                            <p><span>Telefone: </span> {{row.phone|mask:'(00) 00000-0000'}}</p> 
+                            <p><span>CPF:</span> {{row.CPF|mask:'000.000.000-00'}}</p> 
+                        </div>
+                    </div>
+    
+                    <button mat-icon-button *ngIf="_showDense" 
+                        [matMenuTriggerFor]="menu" 
+                        (click)="$event.stopPropagation(); __user=row">
+                        <mat-icon svgIcon="more_vert"></mat-icon>
+                    </button>
+                </div>                
+            </td>
+    
+        </ng-container>
+    
+        <!-- Info columns, only showed for large screens -->
+        <ng-template [ngIf]="!_showDense">
+    
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef> Telefone </th>
+                <td mat-cell *matCellDef="let row"> {{row.phone|mask:'(00) 00000-0000'}} </td>
+            </ng-container>
+    
+    
+            <ng-container matColumnDef="CPF">
+                <th mat-header-cell *matHeaderCellDef> CPF </th>
+                <td mat-cell *matCellDef="let row"> {{row.CPF|mask:'000.000.000-00'}} </td>
+            </ng-container>
+    
+    
+            <ng-container matColumnDef="birthdate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nascimento </th>
+                <td mat-cell *matCellDef="let row"> {{row.birthdate|date:'dd/LL/yyyy'}} </td>
+            </ng-container>
+        </ng-template>
+    
+        <!-- more options column -->
+        <ng-container matColumnDef="star">
+            <th mat-header-cell *matHeaderCellDef>Opções</th>
+            <td mat-cell *matCellDef="let row">
+                <button mat-icon-button  [matMenuTriggerFor]="menu"
+                    (click)="$event.stopPropagation(); __user=row">
+                    <mat-icon svgIcon="more_vert"></mat-icon>
+                </button>
+            </td>
+        </ng-container>
+    
+        <!-- Table headers -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onClick(row)" ></tr>
+    </table>
+    
+    <!-- paginator -->
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]"
+        itemsPerPageLabel="exibir"
+        
+    ></mat-paginator>
+    
+    <!-- Pop-up for more options -->
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onEdit(__user)">
+            <mat-icon svgIcon="edit"></mat-icon>
+            <span>Editar</span>
+        </button>
+        <button mat-menu-item (click)="onDuplicate(__user)">
+            <mat-icon svgIcon="duplicate"></mat-icon>
+            <span>Duplicar</span>
+        </button>
+        <button mat-menu-item (click)="onDelete(__user)">
+            <mat-icon svgIcon="delete"></mat-icon>
+            <span>Deletar</span>
+        </button>
+    </mat-menu>
+</ng-template>

@@ -1,0 +1,8 @@
+<div [formGroup]="addressForm" class="form">
+
+    <mat-form-field *ngFor="let item of formItems"  [ngClass]="item.key">
+        <input matInput [placeholder]="item.placeholder" [mask]="item.mask"
+            [formControlName]="item.key" [required]="item.required">
+    </mat-form-field>
+
+</div>

@@ -1,0 +1,41 @@
+<div [formGroup]="vehicleForm">    
+    <mat-form-field>
+        <input type="text" matInput placeholder="Marca" (input)="onSelect(null, 'brand')"
+            formControlName="brand" required [matAutocomplete]="brandGroup">
+        <mat-autocomplete #brandGroup="matAutocomplete" 
+            (optionSelected)="onSelect($event.option.id, 'brand')">
+            <mat-optgroup *ngFor="let group of brandGroupOptions | async" [label]="group.letter">
+                <mat-option *ngFor="let brand of group.items" [value]="brand.name" [id]="brand.code||brandId">
+                    {{brand.name}}
+                </mat-option>
+            </mat-optgroup>
+        </mat-autocomplete>
+    </mat-form-field>
+    
+
+    <mat-form-field>
+        <input type="text" matInput placeholder="Modelo" (input)="onSelect(null, 'model')"
+            formControlName="model" required [matAutocomplete]="modelGroup">
+        <mat-autocomplete #modelGroup="matAutocomplete"
+             (optionSelected)="onSelect($event.option.id, 'model')">
+            <mat-optgroup *ngFor="let group of modelGroupOptions | async" [label]="group.letter">
+                <mat-option *ngFor="let model of group.items" [value]="model.name" [id]="model.code||modelId">
+                    {{model.name}}
+                </mat-option>
+            </mat-optgroup>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="text" placeholder="Ano do modelo" 
+            matInput formControlName="year"  (input)="onSelect(null, 'year')"
+            [matAutocomplete]="auto" required>
+        <mat-autocomplete #auto="matAutocomplete" 
+            (optionSelected)="onSelect($event.option.id, 'year')">
+            <mat-option *ngFor="let year of yearOptions | async" [value]="year.name" [id]="year.code||yearId">
+                {{year.name}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+</div>

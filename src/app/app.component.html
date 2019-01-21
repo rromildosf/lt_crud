@@ -1,0 +1,25 @@
+<!-- <div class="main-container">
+
+    <mat-toolbar color="primary" class="top-nav">
+        <button mat-button mat-button-clear [routerLink]="['/users']">Lista de usuários</button>
+        <button mat-button mat-button-clear [routerLink]="['/users/new']">Cadastrar novo</button>
+    </mat-toolbar>
+
+    <div class="main-content">
+        <router-outlet></router-outlet>
+    </div>
+</div> -->
+<mat-toolbar color="primary" class="top-nav">
+    <button class="link" (click)="_active = 'list'"  [ngClass]="{'active': _active == 'list'}"
+         mat-button [routerLink]="['/users']">Lista de usuários</button>
+    <button class="link" (click)="_active = 'new'" [ngClass]="{'active': _active == 'new'}"
+         mat-button [routerLink]="['/users/new']">Cadastrar novo</button>
+</mat-toolbar>
+
+<mat-drawer-container class="main-container">
+    
+    <mat-drawer-content class="main-content">
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+
+</mat-drawer-container>

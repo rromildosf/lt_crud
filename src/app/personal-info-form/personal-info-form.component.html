@@ -1,0 +1,24 @@
+<div [formGroup]="personalForm" *ngIf="personalForm">
+    <mat-form-field>
+        <input matInput placeholder="Nome" formControlName="name" required>
+    </mat-form-field>
+    
+    <mat-form-field class="cpf">
+        <input matInput placeholder="CPF" formControlName="CPF" mask="000.000.000-00" required>
+        <mat-error *ngIf="personalForm.get('CPF').hasError('message')">
+            CPF <strong>inválido</strong>
+        </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field class="phone">
+        <input #phoneInput matInput placeholder="Telefone" formControlName="phone" type="tel" 
+            (keyup)="onPhoneChange(phoneInput.value)" mask="{{phoneMask|async}}" required>
+    </mat-form-field>
+    
+    <mat-form-field>
+        <input matInput [matDatepicker]="picker" formControlName="birthdate"
+             placeholder="Data de nascimento" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker [startAt]="startDate" startView="multi-year" #picker></mat-datepicker>
+    </mat-form-field>
+</div>

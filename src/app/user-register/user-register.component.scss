@@ -1,0 +1,27 @@
+.form {
+    max-width: 680px;
+    padding: 16px;
+    border-radius: 3px;
+    margin: auto;
+    box-shadow: 0 2px 3px #cfcfcf;
+
+    .btn-submit {
+        display: flex;
+        justify-content: flex-end
+    }
+
+    .info {
+        font-size: 12px;
+        color: #ff2d11;
+        text-align: right;
+        margin-bottom: 10px;
+    }
+
+    mat-card {
+        margin-bottom: 10px;
+        mat-card-title {
+            font-size: 18px;
+        }
+    }
+
+}
